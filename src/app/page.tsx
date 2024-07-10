@@ -1,9 +1,9 @@
-import MasterComponent from "@/components/MasterComponent";
+import TheTimeTrackerApp from "@/components/TheTimeTrackerApp";
 
 export default function Home() {
   return (
     <>
-      <MasterComponent />
+      <TheTimeTrackerApp />
     </>
   );
 }

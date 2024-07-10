@@ -9,7 +9,7 @@ import { IoMdStopwatch } from "react-icons/io";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { testData, Data } from "@/lib/Data";
 
-const InputText = () => {
+const Main = () => {
   const [text, setText] = useState("");
   const [task, setTask] = useState<Data[]>(testData);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,4 +65,4 @@ const InputText = () => {
   );
 };
 
-export default InputText;
+export default Main;
