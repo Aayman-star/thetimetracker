@@ -1,37 +1,60 @@
-import { FaStop, FaPlay } from "react-icons/fa";
-import { LuTimerReset } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
 import { Button } from "./ui/button";
-
+import { MdDelete } from "react-icons/md";
+import { LuTimerReset } from "react-icons/lu";
+import { FaStop, FaPlay } from "react-icons/fa";
+import { SunIcon } from "@radix-ui/react-icons";
+import { MoonIcon } from "@radix-ui/react-icons";
+//For theme buttons
+type themeProp = {
+  onClick: () => void;
+};
 export const StartButton = () => {
   return (
-    // <button className="bg-muted-foreground/50 rounded-lg text-background p-2">
-    <Button size="icon" className="bg-accent-foreground">
+    <Button size="icon" className="">
       <FaPlay />
     </Button>
-    // </button>
   );
 };
 
 export const StopButton = () => {
   return (
-    <button className="bg-muted-foreground/50 text-background p-2">
+    <Button size="icon" className="">
       <FaStop />
-    </button>
+    </Button>
   );
 };
 
 export const ResetButton = () => {
   return (
-    <button className="bg-muted-foreground/50 rounded-lg text-background p-2">
+    <Button size="icon" className="">
       <LuTimerReset />
-    </button>
+    </Button>
   );
 };
 export const DeleteButton = () => {
   return (
-    <button className="bg-muted-foreground/50 rounded-lg text-background p-2">
+    <Button size="icon" className="">
       <MdDelete />
-    </button>
+    </Button>
   );
 };
+
+export const LightMode = ({ onClick }: themeProp) => {
+  return (
+    <Button onClick={onClick} size="icon" variant="outline">
+      <SunIcon className="text-foreground" />
+    </Button>
+  );
+};
+
+export const DarkMode = ({ onClick }: themeProp) => {
+  return (
+    <Button onClick={onClick} size="icon" variant="outline">
+      <MoonIcon className="text-foreground" />
+    </Button>
+  );
+};
+// ? This is how I styled the button before
+//  <button className="bg-muted-foreground/50 rounded-lg text-background p-2">
+
+//  </button>

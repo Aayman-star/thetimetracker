@@ -8,7 +8,7 @@ const Timer = ({ task }: TextProp) => {
   return (
     <div>
       {task.map((item, i) => (
-        <p key={i} className="text-background  font-light my-2">
+        <p key={i} className="text-foreground  font-light my-2">
           {item.text}
         </p>
       ))}

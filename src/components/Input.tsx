@@ -40,7 +40,7 @@ const InputText = () => {
 
         <div className="w-full">
           <Tabs defaultValue="Stopwatch" className="w-full md:w-[50%] mx-auto ">
-            <TabsList className="grid w-full grid-cols-2 bg-accent-foreground">
+            <TabsList className="grid w-full grid-cols-2 ">
               <TabsTrigger className={``} value="Stopwatch">
                 Stopwatch
                 <IoMdStopwatch />
