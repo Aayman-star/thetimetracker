@@ -12,9 +12,9 @@ import { LightMode, DarkMode } from "./Buttons";
 const TheTimeTrackerApp = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <main className="w-full h-[95vh]   p-20 bg-background">
+    <main className="w-full min-h-screen p-10 md:p-20 bg-background">
       <div className="flex flex-col items-center w-full">
-        <div className="flex  gap-x-4">
+        <div className="flex">
           <h1
             className={`${almendra.className} text-foreground font-bold  text-[1.5rem]  md:text-5xl`}>
             The Time Tracker
@@ -23,16 +23,17 @@ const TheTimeTrackerApp = () => {
               Track your tasks and time with ease!
             </span>
           </h1>
-
-          {theme === "dark" ? (
-            <LightMode
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            />
-          ) : (
-            <DarkMode
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            />
-          )}
+          <div className="md:mt-2">
+            {theme === "dark" ? (
+              <LightMode
+                onbtnClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              />
+            ) : (
+              <DarkMode
+                onbtnClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              />
+            )}
+          </div>
         </div>
 
         <div className="my-4 w-full">

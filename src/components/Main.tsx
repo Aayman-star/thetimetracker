@@ -27,7 +27,7 @@ const Main = () => {
           action="post">
           <Input
             type="text"
-            className="placeholder-zinc-500 placeholder-opacity-50 outline-none text-zinc-300"
+            className="placeholder-foreground placeholder-opacity-50 outline-none text-foreground"
             placeholder="Enter your task here..."
             value={text}
             onChange={(e) => setText(e.target.value)}

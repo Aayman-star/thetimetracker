@@ -64,12 +64,12 @@ const StopWatchComponent = ({ id, task }: WatchProp) => {
       </CardContent>
       <CardFooter className="flex items-center gap-x-4">
         {watchCheck ? (
-          <StopButton onClick={stopWatch} />
+          <StopButton onbtnClick={stopWatch} />
         ) : (
-          <StartButton onClick={startWatch} />
+          <StartButton onbtnClick={startWatch} />
         )}
 
-        <ResetButton onClick={resetWatch} />
+        <ResetButton onbtnClick={resetWatch} />
         <DeleteButton />
       </CardFooter>
     </Card>

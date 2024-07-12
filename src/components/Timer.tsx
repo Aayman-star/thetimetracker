@@ -1,16 +1,15 @@
-import React from "react";
 import { Data } from "@/lib/Data";
+import TimerComponent from "./TimerComponent";
+
 type TextProp = {
   task: Data[];
 };
 
 const Timer = ({ task }: TextProp) => {
   return (
-    <div>
+    <div className="grid grid-col-1 md:grid-cols-2 gap-4">
       {task.map((item, i) => (
-        <p key={i} className="text-foreground  font-light my-2">
-          {item.text}
-        </p>
+        <TimerComponent key={item.id} task={item.text} id={item.id} />
       ))}
     </div>
   );

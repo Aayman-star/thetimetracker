@@ -5,52 +5,52 @@ import { FaStop, FaPlay } from "react-icons/fa";
 import { SunIcon } from "@radix-ui/react-icons";
 import { MoonIcon } from "@radix-ui/react-icons";
 //For theme buttons
-type themeProp = {
-  onClick: () => void;
+type BtnProp = {
+  onbtnClick: () => void;
 };
-export const StartButton = () => {
+export const StartButton = ({ onbtnClick }: BtnProp) => {
   return (
-    <Button size="icon" className="">
+    <Button onClick={onbtnClick} size="icon" className="">
       <FaPlay />
     </Button>
   );
 };
 
-export const StopButton = () => {
+export const StopButton = ({ onbtnClick }: BtnProp) => {
   return (
-    <Button size="icon" className="">
+    <Button onClick={onbtnClick} size="icon" className="">
       <FaStop />
     </Button>
   );
 };
 
-export const ResetButton = () => {
+export const ResetButton = ({ onbtnClick }: BtnProp) => {
   return (
-    <Button size="icon" className="">
-      <LuTimerReset />
+    <Button onClick={onbtnClick} size="icon" className="">
+      <LuTimerReset className="text-xl" />
     </Button>
   );
 };
 export const DeleteButton = () => {
   return (
     <Button size="icon" className="">
-      <MdDelete />
+      <MdDelete className="text-xl" />
     </Button>
   );
 };
 
-export const LightMode = ({ onClick }: themeProp) => {
+export const LightMode = ({ onbtnClick }: BtnProp) => {
   return (
-    <Button onClick={onClick} size="icon" variant="outline">
+    <Button onClick={onbtnClick} size="icon" variant="ghost">
       <SunIcon className="text-foreground" />
     </Button>
   );
 };
 
-export const DarkMode = ({ onClick }: themeProp) => {
+export const DarkMode = ({ onbtnClick }: BtnProp) => {
   return (
-    <Button onClick={onClick} size="icon" variant="outline">
-      <MoonIcon className="text-foreground" />
+    <Button onClick={onbtnClick} size="icon" variant="ghost">
+      <MoonIcon className="text-foreground " />
     </Button>
   );
 };

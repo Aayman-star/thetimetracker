@@ -73,12 +73,12 @@ const TimerComponent = ({ id, task }: TimerProp) => {
         </CardContent>
         <CardFooter className="flex items-center gap-x-4">
           {timerCheck ? (
-            <StopButton onClick={stopTimer} />
+            <StopButton onbtnClick={stopTimer} />
           ) : (
-            <StartButton onClick={countdown} />
+            <StartButton onbtnClick={countdown} />
           )}
 
-          <ResetButton onClick={resetTimer} />
+          <ResetButton onbtnClick={resetTimer} />
           <DeleteButton />
         </CardFooter>
       </Card>

@@ -1,23 +1,24 @@
 "use client";
 import React, { useState } from "react";
-import { StartButton, StopButton, ResetButton, DeleteButton } from "./Buttons";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import StopWatchComponent from "./StopWatchComponent";
 import { Data } from "@/lib/Data";
 type TextProp = {
   task: Data[];
 };
 
 export const StopWatch = ({ task }: TextProp) => {
-  const [time, setTime] = useState(0);
   return (
-    <div className="">
-      {/* <div>
+    <div className="grid grid-col-1 md:grid-cols-2 gap-4">
+      {" "}
+      {task.map((item, i) => (
+        <StopWatchComponent key={item.id} task={item.text} id={item.id} />
+      ))}
+    </div>
+  );
+};
+
+{
+  /* <div>
         {task.map((item, index) => (
           <Card
             key={index}
@@ -50,7 +51,5 @@ export const StopWatch = ({ task }: TextProp) => {
             </CardFooter>
           </Card>
         ))}
-      </div> */}
-    </div>
-  );
-};
+      </div> */
+}
