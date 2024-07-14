@@ -25,12 +25,14 @@ const TheTimeTrackerApp = () => {
             </span>
           </h1>
           <div className="md:mt-2">
-            {theme === "dark" ? (
-              <LightMode
-                onbtnClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            {theme === "light" ? (
+              <DarkMode
+                onbtnClick={() =>
+                  setTheme(theme === "light" ? "dark" : "light")
+                }
               />
             ) : (
-              <DarkMode
+              <LightMode
                 onbtnClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               />
             )}
