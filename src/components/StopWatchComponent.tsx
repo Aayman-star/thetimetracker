@@ -9,15 +9,22 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { useContext } from "react";
+import { ClockContext } from "@/lib/context";
 type WatchProp = {
   id: number;
   task: string;
+  watchTime?: number;
+  // deleteTask: (id: number) => void;
+  // updateTime: (id: number, time: number) => void;
 };
-const StopWatchComponent = ({ id, task }: WatchProp) => {
-  const [time, setTime] = useState(0);
+const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
+  const { stopWatch, resetWatch } = useContext(ClockContext);
+  const [time, setTime] = useState(watchTime ? watchTime : 0);
   const [intervalId, setIntervalId] = useState(0);
   const [watchCheck, setWatchCheck] = useState(false);
-  const resetWatch = () => {
+  const resetTheWatch = (id: number) => {
+    resetWatch(id);
     clearInterval(intervalId);
     setWatchCheck(false);
     setTime(0);
@@ -34,15 +41,21 @@ const StopWatchComponent = ({ id, task }: WatchProp) => {
 
     setIntervalId(interval);
   };
-  const stopWatch = () => {
+  const stopTheWatch = (id: number, time: number) => {
+    // updateTime(id, time);
+    stopWatch(id, time);
     clearInterval(intervalId);
     setWatchCheck(false);
   };
+  const deletetask = (id: number) => {
+    // deleteTask(id);
+  };
+
   return (
     <Card className="my-4 ">
       <CardHeader>
         <CardTitle>
-          <p key={id} className="text-foreground  my-2">
+          <p key={id} className="text-primary  my-2">
             {task}
           </p>
         </CardTitle>
@@ -64,13 +77,13 @@ const StopWatchComponent = ({ id, task }: WatchProp) => {
       </CardContent>
       <CardFooter className="flex items-center gap-x-4">
         {watchCheck ? (
-          <StopButton onbtnClick={stopWatch} />
+          <StopButton onbtnClick={() => stopTheWatch(id, time)} />
         ) : (
           <StartButton onbtnClick={startWatch} />
         )}
 
-        <ResetButton onbtnClick={resetWatch} />
-        <DeleteButton />
+        <ResetButton onbtnClick={() => resetTheWatch(id)} />
+        <DeleteButton onbtnClick={() => deletetask(id)} />
       </CardFooter>
     </Card>
   );

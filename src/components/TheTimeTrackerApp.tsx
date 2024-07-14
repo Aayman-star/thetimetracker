@@ -9,10 +9,11 @@ import Timer from "./Timer";
 import { StopWatch } from "./StopWatch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LightMode, DarkMode } from "./Buttons";
+import ClockContextProvider from "@/lib/ContextProvider";
 const TheTimeTrackerApp = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <main className="w-full min-h-screen p-10 md:p-20 bg-background">
+    <main className="w-full min-h-screen md:min-h-[95vh] p-8 md:p-14 bg-background">
       <div className="flex flex-col items-center w-full">
         <div className="flex">
           <h1
@@ -37,7 +38,9 @@ const TheTimeTrackerApp = () => {
         </div>
 
         <div className="my-4 w-full">
-          <Main />
+          <ClockContextProvider>
+            <Main />
+          </ClockContextProvider>
         </div>
       </div>
     </main>

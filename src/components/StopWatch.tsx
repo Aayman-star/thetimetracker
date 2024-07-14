@@ -1,55 +1,42 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StopWatchComponent from "./StopWatchComponent";
 import { Data } from "@/lib/Data";
-type TextProp = {
-  task: Data[];
-};
+import { useContext } from "react";
+import { ClockContext } from "@/lib/context";
+// type TextProp = {
+//   task: Data[];
+// };
 
-export const StopWatch = ({ task }: TextProp) => {
+export const StopWatch = () => {
+  const { stopWatchArray } = useContext(ClockContext);
+  // const [taskWatch, setTaskWatch] = useState<Data[]>(task);
+  // useEffect(() => {
+  //   setTaskWatch(task);
+  // }, [task]);
+  // console.log("StopWatch", taskWatch);
+  // const deleteTask = (id: number) => {
+  //   console.log("I am in the stopwatch parent");
+  //   setTaskWatch(taskWatch.filter((item) => item.id !== id));
+  //   // console.log("taskWatch", taskWatch);
+  // };
+  // const updateTime = (id: number, time: number) => {
+  //   console.log("I am in the stopwatch parent update time");
+  //   setTaskWatch(
+  //     taskWatch.map((item) => {
+  //       if (item.id === id) {
+  //         return { ...item, stopWatchTime: time };
+  //       }
+  //       return item;
+  //     })
+  //   );
+  // };
+  console.log("Stopwach", stopWatchArray);
   return (
-    <div className="grid grid-col-1 md:grid-cols-2 gap-4">
-      {" "}
-      {task.map((item, i) => (
-        <StopWatchComponent key={item.id} task={item.text} id={item.id} />
+    <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
+      {stopWatchArray.map((item, i) => (
+        <StopWatchComponent key={item.id} {...item} />
       ))}
     </div>
   );
 };
-
-{
-  /* <div>
-        {task.map((item, index) => (
-          <Card
-            key={index}
-            className="bg-zinc-900 my-2 border-muted-foreground shadow-md">
-            <CardHeader>
-              <CardTitle>
-                <p key={index} className="text-background font-light text-lg">
-                  {item.text}
-                </p>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className={`text-primary text-4xl font-semibold`}>
-                {time}:{time}
-              </p>
-            </CardContent>
-            <CardFooter>
-              {" "}
-              <div className="flex items-center gap-x-4">
-                <div>
-                  <StartButton />
-                </div>
-                <div>
-                  <ResetButton />
-                </div>
-                <div>
-                  <DeleteButton />
-                </div>
-              </div>
-            </CardFooter>
-          </Card>
-        ))}
-      </div> */
-}

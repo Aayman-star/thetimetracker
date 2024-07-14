@@ -7,15 +7,23 @@ import { IoIosTimer } from "react-icons/io";
 import { Input } from "@/components/ui/input";
 import { IoMdStopwatch } from "react-icons/io";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { testData, Data } from "@/lib/Data";
+import { Data } from "@/lib/Data";
+import { useContext } from "react";
+import { ClockContext } from "@/lib/context";
 
 const Main = () => {
+  const { addTaskTimer, addTaskWatch } = useContext(ClockContext);
   const [text, setText] = useState("");
-  const [task, setTask] = useState<Data[]>(testData);
+  const [task, setTask] = useState<Data[]>();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTask: Data = { id: task.length + 1, text: text };
-    setTask([...task, newTask]);
+
+    addTaskTimer(text);
+    addTaskWatch(text);
+    // const newTask: Data = { id: task.length + 1, task: text };
+    // setTask([...task, newTask]);
+
     setText("");
   };
   return (
@@ -52,11 +60,11 @@ const Main = () => {
             </TabsList>
             <TabsContent value="Stopwatch">
               {/* <p className="font-light text-primary">The StopWatch Component</p> */}
-              <StopWatch task={task} />
+              <StopWatch />
             </TabsContent>
             <TabsContent value="Timer">
               {/* <p className="text-background font-light">The Timer Component</p> */}
-              <Timer task={task} />
+              <Timer />
             </TabsContent>
           </Tabs>
         </div>

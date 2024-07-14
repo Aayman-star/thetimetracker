@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+#just a file that's hinderig the app fro being built ,will hopefull delete it at the end of the project
+TimeTracker.tsx
