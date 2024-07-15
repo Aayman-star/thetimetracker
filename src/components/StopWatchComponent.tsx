@@ -15,11 +15,10 @@ type WatchProp = {
   id: number;
   task: string;
   watchTime?: number;
-  // deleteTask: (id: number) => void;
-  // updateTime: (id: number, time: number) => void;
 };
 const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
-  const { stopWatch, resetWatch } = useContext(ClockContext);
+  const { stopWatch, resetWatch, deleteTaskFromWatch } =
+    useContext(ClockContext);
   const [time, setTime] = useState(watchTime ? watchTime : 0);
   const [intervalId, setIntervalId] = useState(0);
   const [watchCheck, setWatchCheck] = useState(false);
@@ -42,13 +41,12 @@ const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
     setIntervalId(interval);
   };
   const stopTheWatch = (id: number, time: number) => {
-    // updateTime(id, time);
     stopWatch(id, time);
     clearInterval(intervalId);
     setWatchCheck(false);
   };
   const deletetask = (id: number) => {
-    // deleteTask(id);
+    deleteTaskFromWatch(id);
   };
 
   return (
