@@ -116,7 +116,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       minutes: parseInt(data.minutes ? data.minutes : "0"),
       seconds: parseInt(data.seconds ? data.seconds : "0"),
     });
-    // console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
+    console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
     setEdit(false);
   };
   return (
