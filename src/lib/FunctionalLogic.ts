@@ -26,6 +26,6 @@ export const timeUp = (
   const Hours = Math.abs(Math.floor(x / 3600));
   const Minutes = Math.abs(Math.floor((x % 3600) / 60));
   const Seconds = Math.abs(x % 60);
-  console.log(Hours, Minutes, Seconds);
+  // console.log(Hours, Minutes, Seconds);
   return { Hours, Minutes, Seconds };
 };
