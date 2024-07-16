@@ -39,7 +39,7 @@ const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
   };
   const startWatch = () => {
     setWatchCheck(true);
-    console.log("I am here");
+    // console.log("I am here");
     const interval: any = setInterval(() => {
       setTime(({ hours, minutes, seconds }) => {
         const { Hours, Minutes, Seconds } = timeUp(

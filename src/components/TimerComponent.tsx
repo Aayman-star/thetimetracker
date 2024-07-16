@@ -69,9 +69,9 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   const countdown = () => {
     setTimerCheck(true);
     stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
-    console.log("I am here");
+    // console.log("I am here");
 
-    console.log(time);
+    // console.log(time);
     // const forTimeout = time * 1000;
 
     const interval: any = setInterval(() => {
@@ -82,7 +82,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
         return { hours: Hours, minutes: Minutes, seconds: Seconds };
       });
     }, 1000);
-    console.log("time", time);
+    // console.log("time", time);
 
     setIntervalId(interval);
   };
@@ -105,7 +105,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     deleteTaskFromTimer(id);
   };
   const onSubmit: SubmitHandler<timeVariables> = (data) => {
-    console.log(data);
+    // console.log(data);
 
     const totalTimeInSeconds =
       parseInt(data.hours) * 3600 +
