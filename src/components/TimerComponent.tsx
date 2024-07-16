@@ -24,6 +24,11 @@ type timeVariables = {
   minutes: string;
   seconds: string;
 };
+type timeProp = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
 const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   const {
     register,
@@ -31,18 +36,29 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     watch,
     formState: { errors },
   } = useForm<timeVariables>();
+
+  //!These functions are coming from the context */
+
   const { stopTimer, resetTimer, deleteTaskFromTimer } =
     useContext(ClockContext);
-  //?This is where we take time from user
-  const [inputTime, setInputTime] = useState<number>(0);
-  //? Time coming from the timer array or the default which is 5 minutes
-  const [time, setTime] = useState<number>(timerTime ? timerTime : 300);
+
+  //?Time object to display and handle time,hours,minutes and seconds
+
+  const [time, setTime] = useState<timeProp>({
+    hours: timerTime ? Math.abs(Math.floor(timerTime / 3600)) : 0,
+    minutes: timerTime
+      ? Math.abs(Math.floor((timerTime % 3600) / 60))
+      : 300 / 60,
+    seconds: timerTime ? Math.abs(timerTime % 60) : 0,
+  });
 
   //? This is for editing the default time to take input from the user
   const [edit, setEdit] = useState(false);
+  //!This is to keep a eye on the setInterval function
   const [intervalId, setIntervalId] = useState(0);
+  //! This is a flag to let us know that the timer is on
   const [timerCheck, setTimerCheck] = useState(false);
-
+  //!This is for when we take input from the user
   const inputRef = useRef<any>(null);
 
   useEffect(() => {
@@ -52,26 +68,29 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   }, [edit]);
   const countdown = () => {
     setTimerCheck(true);
+    stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
     console.log("I am here");
 
     console.log(time);
-    const forTimeout = time * 1000;
+    // const forTimeout = time * 1000;
 
-    const timeId = setTimeout(() => {
-      console.log("time Up!");
-    }, forTimeout);
     const interval: any = setInterval(() => {
-      setTime((prevTime) => {
-        const newTime = timedown(prevTime);
-        return newTime;
+      setTime(({ hours, minutes, seconds }) => {
+        const { Hours, Minutes, Seconds } = timedown(
+          hours * 3600 + minutes * 60 + seconds
+        );
+        return { hours: Hours, minutes: Minutes, seconds: Seconds };
       });
     }, 1000);
     console.log("time", time);
 
     setIntervalId(interval);
   };
-  const stopTheTimer = (id: number, time: number) => {
-    stopTimer(id, time);
+  const stopTheTimer = (
+    id: number,
+    time: { hours: number; minutes: number; seconds: number }
+  ) => {
+    stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
     clearInterval(intervalId);
     setTimerCheck(false);
   };
@@ -79,7 +98,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     resetTimer(id);
     clearInterval(intervalId);
     setTimerCheck(false);
-    setTime(300);
+    setTime({ ...time, minutes: 300 / 60 });
   };
   //? Delete Task from the array
   const deleteTask = (id: number) => {
@@ -92,8 +111,12 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       parseInt(data.hours) * 3600 +
       parseInt(data.minutes) * 60 +
       parseInt(data.seconds);
-    setTime(totalTimeInSeconds);
-    console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
+    setTime({
+      hours: parseInt(data.hours ? data.hours : "0"),
+      minutes: parseInt(data.minutes ? data.minutes : "0"),
+      seconds: parseInt(data.seconds ? data.seconds : "0"),
+    });
+    // console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
     setEdit(false);
   };
   return (
@@ -144,18 +167,16 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
               </form>
             ) : (
               <p className={`text-6xl text-primary font-bold`}>
-                {/* Raw manipulation of the time variable */}
-                {Math.abs(Math.floor(time / 3600)) < 10
-                  ? `0${Math.abs(Math.floor(time / 3600))}`
-                  : Math.abs(Math.floor(time / 3600))}
+                <span className={`${time.hours ? "visible" : "hidden"}`}>
+                  {time.hours < 10 ? `0${time.hours}` : time.hours}:
+                </span>
+                <span>
+                  {time.minutes < 10 ? `0${time.minutes}` : time.minutes}
+                </span>
                 :
-                {Math.abs(Math.floor((time % 3600) / 60)) < 10
-                  ? `0${Math.abs(Math.floor((time % 3600) / 60))}`
-                  : Math.abs(Math.floor((time % 3600) / 60))}
-                :
-                {Math.abs(time % 60) < 10
-                  ? `0${Math.abs(time % 60)}`
-                  : Math.abs(time % 60)}
+                <span>
+                  {time.seconds < 10 ? `0${time.seconds}` : time.seconds}
+                </span>
               </p>
             )}
           </div>
