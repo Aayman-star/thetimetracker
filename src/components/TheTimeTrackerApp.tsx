@@ -9,7 +9,7 @@ import Timer from "./Timer";
 import { StopWatch } from "./StopWatch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LightMode, DarkMode } from "./Buttons";
-import ClockContextProvider from "@/lib/ContextProvider";
+import ClockContextProvider from "@/context/ContextProvider";
 const TheTimeTrackerApp = () => {
   const { theme, setTheme } = useTheme();
   return (

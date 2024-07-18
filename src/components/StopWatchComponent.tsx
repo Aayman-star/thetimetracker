@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { useContext } from "react";
-import { ClockContext } from "@/lib/context";
+import { ClockContext } from "@/context/context";
 type WatchProp = {
   id: number;
   task: string;

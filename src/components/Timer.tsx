@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Data } from "@/lib/Data";
 import TimerComponent from "./TimerComponent";
 import { useContext } from "react";
-import { ClockContext } from "@/lib/context";
+import { ClockContext } from "@/context/context";
 
 const Timer = () => {
   const { timerArray } = useContext(ClockContext);

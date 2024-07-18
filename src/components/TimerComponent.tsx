@@ -9,11 +9,19 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { StartButton, StopButton, ResetButton, DeleteButton } from "./Buttons";
+import {
+  StartButton,
+  StopButton,
+  ResetButton,
+  DeleteButton,
+  TimerUp,
+} from "./Buttons";
 import { useContext } from "react";
-import { ClockContext } from "@/lib/context";
+import { ClockContext } from "@/context/context";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "./ui/button";
+import useSound from "use-sound";
+//import bell from "/public/sounds/bell.mp3";
 type TimerProp = {
   id: number;
   task: string;
@@ -36,7 +44,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     watch,
     formState: { errors },
   } = useForm<timeVariables>();
-
+  const [play, { stop }] = useSound("/sounds/bell.mp3");
   //!These functions are coming from the context */
 
   const { stopTimer, resetTimer, deleteTaskFromTimer } =
@@ -66,14 +74,28 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       inputRef.current.focus();
     }
   }, [edit]);
+
+  const onTimeOut = () => {
+    console.log("In time out");
+    // <audio src="/public/sounds/bell.mp3"></audio>;
+    play();
+    // resetTimer(id);
+    clearInterval(intervalId);
+    setTimerCheck(false);
+  };
   const countdown = () => {
+    const totalCountDownTime =
+      (time.hours * 3600 + time.minutes * 60 + time.seconds) * 1000;
+    console.log(totalCountDownTime);
     setTimerCheck(true);
     stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
     // console.log("I am here");
 
     // console.log(time);
     // const forTimeout = time * 1000;
-
+    setTimeout(() => {
+      onTimeOut();
+    }, totalCountDownTime);
     const interval: any = setInterval(() => {
       setTime(({ hours, minutes, seconds }) => {
         const { Hours, Minutes, Seconds } = timedown(
@@ -105,12 +127,13 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     deleteTaskFromTimer(id);
   };
   const onSubmit: SubmitHandler<timeVariables> = (data) => {
-    // console.log(data);
+    console.log(data);
 
     const totalTimeInSeconds =
       parseInt(data.hours) * 3600 +
       parseInt(data.minutes) * 60 +
       parseInt(data.seconds);
+    console.log("Total time in seconds", totalTimeInSeconds);
     setTime({
       hours: parseInt(data.hours ? data.hours : "0"),
       minutes: parseInt(data.minutes ? data.minutes : "0"),
@@ -183,25 +206,14 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
         </CardContent>
         <CardFooter className="flex items-center gap-x-4">
           {timerCheck ? (
-            <StopButton
-              onbtnClick={() => stopTheTimer(id, time)}
-              className="bg-foreground hover:bg-muted-foreground"
-            />
+            <StopButton onbtnClick={() => stopTheTimer(id, time)} />
           ) : (
-            <StartButton
-              onbtnClick={countdown}
-              className="bg-foreground hover:bg-muted-foreground"
-            />
+            <StartButton onbtnClick={countdown} />
           )}
 
-          <ResetButton
-            onbtnClick={() => resetTheTimer(id)}
-            className="bg-foreground hover:bg-muted-foreground"
-          />
-          <DeleteButton
-            onbtnClick={() => deleteTask(id)}
-            className="bg-foreground hover:bg-muted-foreground"
-          />
+          <ResetButton onbtnClick={() => resetTheTimer(id)} />
+          <DeleteButton onbtnClick={() => deleteTask(id)} />
+          <TimerUp onbtnClick={() => stop()} />
         </CardFooter>
       </Card>
     </div>

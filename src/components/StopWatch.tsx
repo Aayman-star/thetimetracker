@@ -2,7 +2,7 @@
 
 import StopWatchComponent from "./StopWatchComponent";
 import { useContext } from "react";
-import { ClockContext } from "@/lib/context";
+import { ClockContext } from "@/context/context";
 
 export const StopWatch = () => {
   const { stopWatchArray } = useContext(ClockContext);

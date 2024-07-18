@@ -5,6 +5,7 @@ import { FaStop, FaPlay } from "react-icons/fa";
 import { SunIcon } from "@radix-ui/react-icons";
 import { MoonIcon } from "@radix-ui/react-icons";
 import React, { FC } from "react";
+import { GiAlarmClock } from "react-icons/gi";
 //For theme buttons
 type BtnProp = {
   onbtnClick: () => void;
@@ -12,7 +13,11 @@ type BtnProp = {
 };
 export const StartButton: FC<BtnProp> = ({ onbtnClick, className }) => {
   return (
-    <Button onClick={onbtnClick} size="icon" className={className && className}>
+    <Button
+      onClick={onbtnClick}
+      size="icon"
+      className={className && className}
+      variant="secondary">
       <FaPlay />
     </Button>
   );
@@ -20,7 +25,11 @@ export const StartButton: FC<BtnProp> = ({ onbtnClick, className }) => {
 
 export const StopButton = ({ onbtnClick, className }: BtnProp) => {
   return (
-    <Button onClick={onbtnClick} size="icon" className={className}>
+    <Button
+      onClick={onbtnClick}
+      size="icon"
+      className={className}
+      variant="secondary">
       <FaStop />
     </Button>
   );
@@ -28,14 +37,22 @@ export const StopButton = ({ onbtnClick, className }: BtnProp) => {
 
 export const ResetButton = ({ onbtnClick, className }: BtnProp) => {
   return (
-    <Button onClick={onbtnClick} size="icon" className={className}>
+    <Button
+      onClick={onbtnClick}
+      size="icon"
+      className={className}
+      variant="secondary">
       <LuTimerReset className="text-xl" />
     </Button>
   );
 };
 export const DeleteButton = ({ onbtnClick, className }: BtnProp) => {
   return (
-    <Button onClick={onbtnClick} size="icon" className={className}>
+    <Button
+      onClick={onbtnClick}
+      size="icon"
+      className={className}
+      variant="secondary">
       <MdDelete className="text-xl" />
     </Button>
   );
@@ -64,6 +81,19 @@ export const DarkMode = ({ onbtnClick, className }: BtnProp) => {
     </Button>
   );
 };
+
+export const TimerUp = ({ onbtnClick, className }: BtnProp) => {
+  return (
+    <Button
+      onClick={onbtnClick}
+      size="icon"
+      className={className}
+      variant="secondary">
+      <GiAlarmClock className="text-xl rotate-90" />
+    </Button>
+  );
+};
+
 // ? This is how I styled the button before
 //  <button className="bg-muted-foreground/50 rounded-lg text-background p-2">
 

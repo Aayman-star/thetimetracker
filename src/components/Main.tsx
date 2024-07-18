@@ -9,7 +9,7 @@ import { IoMdStopwatch } from "react-icons/io";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Data } from "@/lib/Data";
 import { useContext } from "react";
-import { ClockContext } from "@/lib/context";
+import { ClockContext } from "@/context/context";
 
 const Main = () => {
   const { addTaskTimer, addTaskWatch } = useContext(ClockContext);

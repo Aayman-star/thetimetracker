@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useState } from "react";
 import { ClockContext } from "./context";
 import { Timer, Watch, inputContext } from "./context";
-import { testDataTimer, testDataStopWatch } from "./Data";
+import { testDataTimer, testDataStopWatch } from "../lib/Data";
 type ContextProviderProps = {
   children: ReactNode;
 };

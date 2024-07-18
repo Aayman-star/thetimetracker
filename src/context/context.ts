@@ -19,8 +19,7 @@ export type inputContext = {
 type TimeTrackingContextState = {
   timerArray: Timer[];
   stopWatchArray: Watch[];
-  //   userInput: string;
-  //   setUserInput: (task: string) => void;
+
   addTaskTimer: (task: string) => void;
   addTaskWatch: (task: string) => void;
   startTimer: (id: number) => void;
@@ -31,10 +30,6 @@ type TimeTrackingContextState = {
   resetTimer: (id: number) => void;
   deleteTaskFromTimer: (id: number) => void;
   deleteTaskFromWatch: (id: number) => void;
-  //   startTracking: (id: number) => void;
-  //   storeTime: (id: number, time: number) => void;
-  //   deleteTask: (id: number) => void;
-  //   resetTimer: (id: number) => void;
 };
 
 export const ClockContext = createContext<TimeTrackingContextState>({
@@ -52,9 +47,4 @@ export const ClockContext = createContext<TimeTrackingContextState>({
   resetTimer: () => {},
   deleteTaskFromTimer: () => {},
   deleteTaskFromWatch: () => {},
-  //   startTracking: () => {},
-  //   startTracking: () => {},
-  //   storeTime: () => {},
-  //   deleteTask: () => {},
-  //   resetTimer: () => {},
 });
