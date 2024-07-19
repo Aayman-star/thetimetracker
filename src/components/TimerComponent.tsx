@@ -47,7 +47,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   const [play, { stop }] = useSound("/sounds/bell.mp3");
   //!These functions are coming from the context */
 
-  const { stopTimer, resetTimer, deleteTaskFromTimer } =
+  const { startTimer, resetTimer, deleteTaskFromTimer } =
     useContext(ClockContext);
 
   //?Time object to display and handle time,hours,minutes and seconds
@@ -58,6 +58,11 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       ? Math.abs(Math.floor((timerTime % 3600) / 60))
       : 300 / 60,
     seconds: timerTime ? Math.abs(timerTime % 60) : 0,
+  });
+  const [userTime, setUserTime] = useState<timeProp>({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   //? This is for editing the default time to take input from the user
@@ -76,26 +81,19 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   }, [edit]);
 
   const onTimeOut = () => {
-    console.log("In time out");
-    // <audio src="/public/sounds/bell.mp3"></audio>;
     play();
     // resetTimer(id);
-    clearInterval(intervalId);
-    setTimerCheck(false);
   };
   const countdown = () => {
     const totalCountDownTime =
-      (time.hours * 3600 + time.minutes * 60 + time.seconds) * 1000;
+      time.hours * 3600 + time.minutes * 60 + time.seconds;
+    const totalCountDownTimeInMS = totalCountDownTime * 1000;
     console.log(totalCountDownTime);
     setTimerCheck(true);
-    stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
-    // console.log("I am here");
-
-    // console.log(time);
-    // const forTimeout = time * 1000;
+    startTimer(id, totalCountDownTime);
     setTimeout(() => {
       onTimeOut();
-    }, totalCountDownTime);
+    }, totalCountDownTimeInMS);
     const interval: any = setInterval(() => {
       setTime(({ hours, minutes, seconds }) => {
         const { Hours, Minutes, Seconds } = timedown(
@@ -112,7 +110,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     id: number,
     time: { hours: number; minutes: number; seconds: number }
   ) => {
-    stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
+    // stopTimer(id, time.hours * 3600 + time.minutes * 60 + time.seconds);
     clearInterval(intervalId);
     setTimerCheck(false);
   };
@@ -120,7 +118,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     resetTimer(id);
     clearInterval(intervalId);
     setTimerCheck(false);
-    setTime({ ...time, minutes: 300 / 60 });
+    setTime(userTime ? userTime : { ...time, minutes: 300 / 60 });
   };
   //? Delete Task from the array
   const deleteTask = (id: number) => {
@@ -139,8 +137,24 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       minutes: parseInt(data.minutes ? data.minutes : "0"),
       seconds: parseInt(data.seconds ? data.seconds : "0"),
     });
+    setUserTime({
+      hours: parseInt(data.hours ? data.hours : "0"),
+      minutes: parseInt(data.minutes ? data.minutes : "0"),
+      seconds: parseInt(data.seconds ? data.seconds : "0"),
+    });
+    console.log("user time", userTime);
     console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
     setEdit(false);
+  };
+
+  const onTimeUp = (
+    id: number,
+    time: { hours: number; minutes: number; seconds: number }
+  ) => {
+    stop();
+    // resetTheTimer(id);
+    stopTheTimer(id, time);
+    console.log(userTime);
   };
   return (
     <div>
@@ -213,7 +227,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
 
           <ResetButton onbtnClick={() => resetTheTimer(id)} />
           <DeleteButton onbtnClick={() => deleteTask(id)} />
-          <TimerUp onbtnClick={() => stop()} />
+          <TimerUp onbtnClick={() => onTimeUp(id, time)} />
         </CardFooter>
       </Card>
     </div>

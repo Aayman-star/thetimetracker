@@ -30,9 +30,9 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   };
 
   //? Function to start the timer
-  const startTimer = () => {};
+
   //? Function to stop the timer and store the time in the array
-  const stopTimer = (id: number, time: number) => {
+  const startTimer = (id: number, time: number) => {
     setTimerArray(
       timerArray.map((item, i) =>
         item.id === id ? { ...item, timerTime: time } : item
@@ -84,7 +84,7 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
         addTaskTimer,
         addTaskWatch,
         startTimer,
-        stopTimer,
+
         startWatch,
         stopWatch,
         resetWatch,
