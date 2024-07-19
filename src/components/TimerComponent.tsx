@@ -41,7 +41,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm<timeVariables>();
   const [play, { stop }] = useSound("/sounds/bell.mp3");
@@ -132,7 +132,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       parseInt(data.hours) * 3600 +
       parseInt(data.minutes) * 60 +
       parseInt(data.seconds);
-    console.log("Total time in seconds", totalTimeInSeconds);
+    // console.log("Total time in seconds", totalTimeInSeconds);
     setTime({
       hours: parseInt(data.hours ? data.hours : "0"),
       minutes: parseInt(data.minutes ? data.minutes : "0"),
@@ -143,8 +143,8 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       minutes: parseInt(data.minutes ? data.minutes : "0"),
       seconds: parseInt(data.seconds ? data.seconds : "0"),
     });
-    console.log("user time", userTime);
-    console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
+    // console.log("user time", userTime);
+    // console.log("Time", time, "Total time in seconds", totalTimeInSeconds);
     setEdit(false);
   };
 
