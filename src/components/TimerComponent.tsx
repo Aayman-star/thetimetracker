@@ -59,6 +59,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
       : 300 / 60,
     seconds: timerTime ? Math.abs(timerTime % 60) : 0,
   });
+  //? This variable will keep record of the time given as input by the user
   const [userTime, setUserTime] = useState<timeProp>({
     hours: 0,
     minutes: 0,
