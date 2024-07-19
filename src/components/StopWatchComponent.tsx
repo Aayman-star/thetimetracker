@@ -67,11 +67,13 @@ const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
     <Card className="my-4 ">
       <CardHeader>
         <CardTitle>
-          <p key={id} className="text-primary  my-2">
+          <p key={id} className="text-primary text-xl  my-2">
             {task}
           </p>
         </CardTitle>
+        <hr />
       </CardHeader>
+
       <CardContent>
         <p className={`text-6xl text-foreground font-bold`}>
           <span className={`${time.hours ? "visible" : "hidden"}`}>
@@ -98,13 +100,29 @@ const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
       </CardContent>
       <CardFooter className="flex items-center gap-x-4">
         {watchCheck ? (
-          <StopButton onbtnClick={() => stopTheWatch(id, time)} />
+          <StopButton
+            onbtnClick={() => stopTheWatch(id, time)}
+            Variant="link"
+            className="border-[1px] border-primary"
+          />
         ) : (
-          <StartButton onbtnClick={startWatch} />
+          <StartButton
+            onbtnClick={startWatch}
+            Variant="link"
+            className="border-[1px] border-primary"
+          />
         )}
 
-        <ResetButton onbtnClick={() => resetTheWatch(id)} />
-        <DeleteButton onbtnClick={() => deletetask(id)} />
+        <ResetButton
+          onbtnClick={() => resetTheWatch(id)}
+          Variant="link"
+          className="border-[1px] border-primary"
+        />
+        <DeleteButton
+          onbtnClick={() => deletetask(id)}
+          Variant="link"
+          className="border-[1px] border-primary"
+        />
       </CardFooter>
     </Card>
   );

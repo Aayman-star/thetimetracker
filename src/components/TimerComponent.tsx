@@ -169,6 +169,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
               {task}
             </p>
           </CardTitle>
+          <hr />
         </CardHeader>
         <CardContent>
           <div onDoubleClick={() => setEdit(true)}>
@@ -224,14 +225,20 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
         </CardContent>
         <CardFooter className="flex items-center gap-x-4">
           {timerCheck ? (
-            <StopButton onbtnClick={() => stopTheTimer(id, time)} />
+            <StopButton
+              onbtnClick={() => stopTheTimer(id, time)}
+              Variant="secondary"
+            />
           ) : (
-            <StartButton onbtnClick={countdown} />
+            <StartButton onbtnClick={countdown} Variant="secondary" />
           )}
 
-          <ResetButton onbtnClick={() => resetTheTimer(id)} />
-          <DeleteButton onbtnClick={() => deleteTask(id)} />
-          <TimerUp onbtnClick={() => onTimeUp(id, time)} />
+          <ResetButton
+            onbtnClick={() => resetTheTimer(id)}
+            Variant="secondary"
+          />
+          <DeleteButton onbtnClick={() => deleteTask(id)} Variant="secondary" />
+          <TimerUp onbtnClick={() => onTimeUp(id, time)} Variant="secondary" />
         </CardFooter>
       </Card>
     </div>

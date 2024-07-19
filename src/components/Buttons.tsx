@@ -10,85 +10,96 @@ import { GiAlarmClock } from "react-icons/gi";
 type BtnProp = {
   onbtnClick: () => void;
   className?: string;
+  Variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
 };
-export const StartButton: FC<BtnProp> = ({ onbtnClick, className }) => {
+export const StartButton: FC<BtnProp> = ({
+  onbtnClick,
+  className,
+  Variant,
+}) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
       className={className && className}
-      variant="secondary">
+      variant={Variant && Variant}>
       <FaPlay />
     </Button>
   );
 };
 
-export const StopButton = ({ onbtnClick, className }: BtnProp) => {
+export const StopButton = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
       className={className}
-      variant="secondary">
+      variant={Variant}>
       <FaStop />
     </Button>
   );
 };
 
-export const ResetButton = ({ onbtnClick, className }: BtnProp) => {
+export const ResetButton = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
       className={className}
-      variant="secondary">
+      variant={Variant}>
       <LuTimerReset className="text-xl" />
     </Button>
   );
 };
-export const DeleteButton = ({ onbtnClick, className }: BtnProp) => {
+export const DeleteButton = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
       className={className}
-      variant="secondary">
+      variant={Variant}>
       <MdDelete className="text-xl" />
     </Button>
   );
 };
 
-export const LightMode = ({ onbtnClick, className }: BtnProp) => {
+export const LightMode = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
-      variant="ghost"
+      variant={Variant}
       className={className}>
       <SunIcon className="text-foreground" />
     </Button>
   );
 };
 
-export const DarkMode = ({ onbtnClick, className }: BtnProp) => {
+export const DarkMode = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
-      variant="ghost"
+      variant={Variant}
       className={className}>
       <MoonIcon className="text-foreground " />
     </Button>
   );
 };
 
-export const TimerUp = ({ onbtnClick, className }: BtnProp) => {
+export const TimerUp = ({ onbtnClick, className, Variant }: BtnProp) => {
   return (
     <Button
       onClick={onbtnClick}
       size="icon"
       className={className}
-      variant="secondary">
+      variant={Variant}>
       <GiAlarmClock className="text-xl rotate-90" />
     </Button>
   );

@@ -30,10 +30,12 @@ const TheTimeTrackerApp = () => {
                 onbtnClick={() =>
                   setTheme(theme === "light" ? "dark" : "light")
                 }
+                Variant="ghost"
               />
             ) : (
               <LightMode
                 onbtnClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                Variant="ghost"
               />
             )}
           </div>
