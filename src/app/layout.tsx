@@ -6,7 +6,7 @@ import "./globals.css";
 import { inter, monty } from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Time Tracker",
+  title: { default: "Time Tracker", template: "%s  |  Time Tracker" },
   description: "A app that helps you keep track of your time",
 };
 

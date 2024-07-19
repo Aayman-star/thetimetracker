@@ -60,10 +60,10 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   };
 
   //? Function to reset the timer
-  const resetTimer = (id: number) => {
+  const resetTimer = (id: number, time?: number) => {
     setTimerArray(
       timerArray.map((item, i) =>
-        item.id === id ? { ...item, timerTime: 0 } : item
+        item.id === id ? { ...item, timerTime: time ? time : 0 } : item
       )
     );
   };
@@ -84,7 +84,6 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
         addTaskTimer,
         addTaskWatch,
         startTimer,
-
         startWatch,
         stopWatch,
         resetWatch,

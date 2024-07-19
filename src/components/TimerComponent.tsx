@@ -21,7 +21,7 @@ import { ClockContext } from "@/context/context";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "./ui/button";
 import useSound from "use-sound";
-//import bell from "/public/sounds/bell.mp3";
+
 type TimerProp = {
   id: number;
   task: string;
@@ -116,7 +116,10 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
     setTimerCheck(false);
   };
   const resetTheTimer = (id: number) => {
-    resetTimer(id);
+    resetTimer(
+      id,
+      userTime.hours * 3600 + userTime.minutes * 60 + userTime.seconds
+    );
     clearInterval(intervalId);
     setTimerCheck(false);
     setTime(userTime ? userTime : { ...time, minutes: 300 / 60 });
