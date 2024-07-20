@@ -34,8 +34,6 @@ type TimeTrackingContextState = {
 export const ClockContext = createContext<TimeTrackingContextState>({
   timerArray: [],
   stopWatchArray: [],
-  //   userInput: "",
-  //   setUserInput: () => {},
   addTaskTimer: () => {},
   addTaskWatch: () => {},
   startTimer: () => {},
