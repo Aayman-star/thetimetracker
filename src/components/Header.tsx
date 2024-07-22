@@ -8,11 +8,11 @@ const Header = async () => {
 
   return (
     <header className="w-full h-10 fixed px-8 top-5 flex items-center justify-end">
-      {/* <SignedOut>
+      <SignedOut>
         <div className="h-full w-20  bg-muted grid place-content-center rounded-md">
           <SignInButton />
         </div>
-      </SignedOut> */}
+      </SignedOut>
 
       <SignedIn>
         <p className="px-2"> {capitalizeFirstLetter(username)}</p>
