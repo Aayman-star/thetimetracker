@@ -7,19 +7,21 @@ const Header = async () => {
   const username = user?.username;
 
   return (
-    <header className="w-full h-10 fixed px-8 top-5 flex items-center justify-end">
-      <SignedOut>
-        <div className="h-full w-20  bg-muted grid place-content-center rounded-md">
-          <SignInButton />
-        </div>
-      </SignedOut>
+    <>
+      <header className="hidden w-full h-10 fixed px-8 top-5 md:flex md:items-center md:justify-end">
+        <SignedOut>
+          <div className="h-full w-20  bg-muted grid place-content-center rounded-md">
+            <SignInButton />
+          </div>
+        </SignedOut>
 
-      <SignedIn>
-        <p className="px-2"> {capitalizeFirstLetter(username)}</p>
-
-        <UserButton />
-      </SignedIn>
-    </header>
+        <SignedIn>
+          <p className="px-2"> {capitalizeFirstLetter(username)}</p>
+          <UserButton />
+        </SignedIn>
+      </header>
+      <header className="md:hidden w-full py-8 px-4 bg-background border-b-[1px] border-muted-foreground"></header>
+    </>
   );
 };
 const capitalizeFirstLetter = (str: string | null | undefined): string => {
