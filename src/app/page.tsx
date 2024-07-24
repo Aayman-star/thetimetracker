@@ -12,4 +12,3 @@ export default function Home() {
     </>
   );
 }
-// bg - [url("/anchors-away.svg")];
