@@ -3,11 +3,7 @@ import { useTheme } from "next-themes";
 import { monty } from "@/lib/fonts";
 import { almendra } from "@/lib/fonts";
 import Main from "@/components/Main";
-import { IoIosTimer } from "react-icons/io";
-import { IoMdStopwatch } from "react-icons/io";
-import Timer from "./Timer";
-import { StopWatch } from "./StopWatch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { LightMode, DarkMode } from "./Buttons";
 import ClockContextProvider from "@/context/ContextProvider";
 const TheTimeTrackerApp = () => {

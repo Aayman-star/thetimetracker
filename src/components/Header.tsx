@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const Header = async () => {
   const user = await currentUser();
-
+  // console.log(user?.username, user?.id);
   const username = user?.username;
 
   return (
@@ -11,7 +11,7 @@ const Header = async () => {
       <header className="hidden w-full h-10 fixed px-8 top-5 md:flex md:items-center md:justify-end">
         <SignedOut>
           <div className="h-full w-20  bg-muted grid place-content-center rounded-md">
-            <SignInButton />
+            <SignInButton mode="modal" />
           </div>
         </SignedOut>
 

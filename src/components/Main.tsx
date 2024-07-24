@@ -10,21 +10,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Data } from "@/lib/Data";
 import { useContext } from "react";
 import { ClockContext } from "@/context/context";
+import { useUser } from "@clerk/nextjs";
+import { SignInButton, SignedOut } from "@clerk/nextjs";
+import { DividerHorizontalIcon } from "@radix-ui/react-icons";
 
 const Main = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
   const { addTaskTimer, addTaskWatch } = useContext(ClockContext);
   const [text, setText] = useState("");
   const [task, setTask] = useState<Data[]>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isSignedIn) {
+      setText("");
+      console.log("not signed in");
+    } else {
+      addTaskTimer(text);
+      addTaskWatch(text);
+      setText("");
+    }
 
-    addTaskTimer(text);
-    addTaskWatch(text);
     // const newTask: Data = { id: task.length + 1, task: text };
     // setTask([...task, newTask]);
-
-    setText("");
   };
   return (
     <>
@@ -36,7 +44,11 @@ const Main = () => {
           <Input
             type="text"
             className="placeholder-foreground placeholder-opacity-50 outline-none text-foreground"
-            placeholder="Enter your task here..."
+            placeholder={
+              !isSignedIn
+                ? `Please Sign In First...`
+                : `Enter your task here...`
+            }
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -74,3 +86,13 @@ const Main = () => {
 };
 
 export default Main;
+
+export const SignInModal = () => {
+  return (
+    <div className="w-full h-screen grid place-content-center">
+      <SignedOut>
+        <SignInButton mode="modal" />
+      </SignedOut>
+    </div>
+  );
+};
