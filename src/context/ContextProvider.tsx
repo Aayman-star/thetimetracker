@@ -1,11 +1,14 @@
-import React, { FC, ReactNode, useState } from "react";
+"use client";
 import { ClockContext } from "./context";
-import { Timer, Watch, inputContext } from "./context";
+import { Timer, Watch } from "./context";
+import { useTheme } from "next-themes";
+import React, { ReactNode, useState } from "react";
 import { testDataTimer, testDataStopWatch } from "../lib/Data";
 type ContextProviderProps = {
   children: ReactNode;
 };
 const ClockContextProvider = ({ children }: ContextProviderProps) => {
+  const { theme, setTheme } = useTheme();
   const [timerArray, setTimerArray] = useState<Timer[]>(testDataTimer);
   const [stopWatchArray, setStopWatchArray] =
     useState<Watch[]>(testDataStopWatch);
@@ -79,8 +82,10 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   return (
     <ClockContext.Provider
       value={{
+        theme,
         timerArray,
         stopWatchArray,
+        setTheme,
         addTaskTimer,
         addTaskWatch,
         startTimer,

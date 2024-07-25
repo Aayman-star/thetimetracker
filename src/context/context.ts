@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 // Props for the timer
 export type Timer = {
@@ -19,7 +19,8 @@ export type inputContext = {
 type TimeTrackingContextState = {
   timerArray: Timer[];
   stopWatchArray: Watch[];
-
+  theme: string | undefined;
+  setTheme: (theme: string) => void;
   addTaskTimer: (task: string) => void;
   addTaskWatch: (task: string) => void;
   startTimer: (id: number, time: number) => void;
@@ -34,6 +35,8 @@ type TimeTrackingContextState = {
 export const ClockContext = createContext<TimeTrackingContextState>({
   timerArray: [],
   stopWatchArray: [],
+  theme: "",
+  setTheme: () => {},
   addTaskTimer: () => {},
   addTaskWatch: () => {},
   startTimer: () => {},

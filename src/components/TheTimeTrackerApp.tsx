@@ -1,13 +1,15 @@
 "use client";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 import { monty } from "@/lib/fonts";
 import { almendra } from "@/lib/fonts";
 import Main from "@/components/Main";
-
+import { useContext } from "react";
+import { ClockContext } from "@/context/context";
 import { LightMode, DarkMode } from "./Buttons";
-import ClockContextProvider from "@/context/ContextProvider";
+
 const TheTimeTrackerApp = () => {
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useContext(ClockContext);
   return (
     <main className="w-full min-h-screen md:min-h-[95vh] p-8 md:p-14 bg-background">
       <div className="flex flex-col items-center w-full">
@@ -38,9 +40,7 @@ const TheTimeTrackerApp = () => {
         </div>
 
         <div className="my-4 w-full">
-          <ClockContextProvider>
-            <Main />
-          </ClockContextProvider>
+          <Main />
         </div>
       </div>
     </main>

@@ -23,6 +23,8 @@ const Main = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isSignedIn) {
+      addTaskTimer(text);
+      addTaskWatch(text);
       setText("");
       console.log("not signed in");
     } else {
@@ -46,7 +48,7 @@ const Main = () => {
             className="placeholder-foreground placeholder-opacity-50 outline-none text-foreground"
             placeholder={
               !isSignedIn
-                ? `Please Sign In First...`
+                ? `Sign In to save your tasks...`
                 : `Enter your task here...`
             }
             value={text}

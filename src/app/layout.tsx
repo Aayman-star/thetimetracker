@@ -1,11 +1,11 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
-
-import "./globals.css";
 import { inter, monty } from "@/lib/fonts";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/theme-provider";
+import ClockContextProvider from "@/context/ContextProvider";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
@@ -21,16 +21,18 @@ export default function RootLayout({
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning={true}>
         <body className={` ${monty.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
-            <Header />
-            {children}
-            <Footer />
+            <ClockContextProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ClockContextProvider>
           </ThemeProvider>
         </body>
       </html>
