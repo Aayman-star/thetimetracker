@@ -8,7 +8,7 @@ type ContextProviderProps = {
   children: ReactNode;
 };
 const ClockContextProvider = ({ children }: ContextProviderProps) => {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [timerArray, setTimerArray] = useState<Timer[]>(testDataTimer);
   const [stopWatchArray, setStopWatchArray] =
     useState<Watch[]>(testDataStopWatch);
