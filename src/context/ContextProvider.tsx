@@ -2,23 +2,60 @@
 import { ClockContext } from "./context";
 import { Timer, Watch } from "./context";
 import { useTheme } from "next-themes";
-import React, { ReactNode, useState } from "react";
-import { testDataTimer, testDataStopWatch } from "../lib/Data";
+import { useUser } from "@clerk/nextjs";
+import React, {
+  ReactNode,
+  useState,
+  useEffect,
+  useInsertionEffect,
+} from "react";
+import { testDataTimer, testDataStopWatch, Data } from "../lib/Data";
+import { fetchTasks } from "@/lib/DataBaseFunctions";
 type ContextProviderProps = {
   children: ReactNode;
 };
+type data = {
+  id: number;
+  user_id: string;
+  tasktext: string;
+  timertime: number;
+  stopwatchtime: number;
+  created_at: Date;
+};
 const ClockContextProvider = ({ children }: ContextProviderProps) => {
+  const { isLoaded, isSignedIn, user } = useUser();
   const { theme, resolvedTheme, setTheme } = useTheme();
-  const [timerArray, setTimerArray] = useState<Timer[]>(testDataTimer);
-  const [stopWatchArray, setStopWatchArray] =
-    useState<Watch[]>(testDataStopWatch);
+  const [Tasks, setTasks] = useState<any[]>([]);
+  const [timerArray, setTimerArray] = useState<Timer[]>(
+    user ? [] : testDataTimer
+  );
+  const [stopWatchArray, setStopWatchArray] = useState<Watch[]>(
+    user ? [] : testDataStopWatch
+  );
   //   const [userInput, setUserInput] = useState<string>("");
+  const fetchTimerData = async (id: string) => {
+    const data: Array<data> = await fetchTasks(id);
+    if (data) {
+      console.log("Timer Array:", data);
+    } else {
+      console.log("No Data");
+    }
+    const tempTimerData = data?.filter((item, i) => item?.timertime);
+    const tempStopWatchData = data?.filter((item, i) => item?.stopwatchtime);
+    setTimerArray(tempTimerData);
+    setStopWatchArray(tempStopWatchData);
+  };
+  useEffect(() => {
+    if (isSignedIn && user) {
+      fetchTimerData(user?.id);
+    }
+  }, [isSignedIn, user]);
 
   //? Function to add task to the timer array
   const addTaskTimer = (task: string) => {
     const newTask = {
       id: timerArray.length + 1,
-      task: task,
+      tasktext: task,
     };
     setTimerArray([...timerArray, newTask]);
   };
@@ -27,7 +64,7 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const addTaskWatch = (task: string) => {
     const newTask = {
       id: stopWatchArray.length + 1,
-      task: task,
+      tasktext: task,
     };
     setStopWatchArray([...stopWatchArray, newTask]);
   };

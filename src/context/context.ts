@@ -3,14 +3,16 @@ import { createContext } from "react";
 // Props for the timer
 export type Timer = {
   id: number;
-  task: string;
+  tasktext: string;
   timerTime?: number;
+  created_at?: Date;
 };
 // Props for the Stopwatch
 export type Watch = {
   id: number;
-  task: string;
+  tasktext: string;
   watchTime?: number;
+  created_at?: Date;
 };
 export type inputContext = {
   inputText: string;

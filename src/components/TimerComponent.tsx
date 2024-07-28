@@ -24,8 +24,8 @@ import useSound from "use-sound";
 
 type TimerProp = {
   id: number;
-  task: string;
-  timerTime?: number;
+  tasktext: string;
+  timertime?: number;
 };
 type timeVariables = {
   hours: string;
@@ -37,7 +37,7 @@ type timeProp = {
   minutes: number;
   seconds: number;
 };
-const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
+const TimerComponent = ({ id, tasktext, timertime }: TimerProp) => {
   const {
     register,
     handleSubmit,
@@ -53,11 +53,11 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
   //?Time object to display and handle time,hours,minutes and seconds
 
   const [time, setTime] = useState<timeProp>({
-    hours: timerTime ? Math.abs(Math.floor(timerTime / 3600)) : 0,
-    minutes: timerTime
-      ? Math.abs(Math.floor((timerTime % 3600) / 60))
+    hours: timertime ? Math.abs(Math.floor(timertime / 3600)) : 0,
+    minutes: timertime
+      ? Math.abs(Math.floor((timertime % 3600) / 60))
       : 300 / 60,
-    seconds: timerTime ? Math.abs(timerTime % 60) : 0,
+    seconds: timertime ? Math.abs(timertime % 60) : 0,
   });
   //? This variable will keep record of the time given as input by the user
   const [userTime, setUserTime] = useState<timeProp>({
@@ -166,7 +166,7 @@ const TimerComponent = ({ id, task, timerTime }: TimerProp) => {
         <CardHeader>
           <CardTitle>
             <p key={id} className=" text-2xl my-2">
-              {task}
+              {tasktext}
             </p>
           </CardTitle>
           <hr />

@@ -1,5 +1,8 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import { SunIcon } from "@radix-ui/react-icons";
+import { MoonIcon } from "@radix-ui/react-icons";
+import { DesktopIcon } from "@radix-ui/react-icons";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Header = async () => {
   const user = await currentUser();
@@ -10,13 +13,22 @@ const Header = async () => {
     <>
       <header className="hidden w-full h-10 fixed px-8 top-5 md:flex md:items-center md:justify-end">
         <SignedOut>
+          {/* <div className="px-2 py-2 bg-muted rounded-full flex items-center gap-x-2">
+            <SunIcon />
+            <DesktopIcon />
+            <MoonIcon />
+          </div> */}
           <div className="h-full w-20  bg-muted grid place-content-center rounded-md">
             <SignInButton mode="modal" />
           </div>
         </SignedOut>
 
         <SignedIn>
-          <p className="px-2"> {capitalizeFirstLetter(username)}</p>
+          <p className="px-2">
+            {" "}
+            {capitalizeFirstLetter(username)}
+            {user?.id}
+          </p>
           <UserButton />
         </SignedIn>
       </header>

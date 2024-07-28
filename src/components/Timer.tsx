@@ -4,8 +4,12 @@ import { Data } from "@/lib/Data";
 import TimerComponent from "./TimerComponent";
 import { useContext } from "react";
 import { ClockContext } from "@/context/context";
+import { useUser } from "@clerk/nextjs";
+import { fetchTasks } from "@/lib/DataBaseFunctions";
 
 const Timer = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+
   const { timerArray } = useContext(ClockContext);
 
   console.log("Timer", timerArray);
@@ -19,3 +23,7 @@ const Timer = () => {
 };
 
 export default Timer;
+const fetchTimerTasks = async (user_id: string) => {
+  const res = await fetchTasks(user_id);
+  return res;
+};

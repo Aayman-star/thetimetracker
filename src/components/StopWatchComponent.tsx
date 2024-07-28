@@ -13,21 +13,23 @@ import { useContext } from "react";
 import { ClockContext } from "@/context/context";
 type WatchProp = {
   id: number;
-  task: string;
-  watchTime?: number;
+  tasktext: string;
+  stopwatchtime?: number;
 };
 type timeProp = {
   hours: number;
   minutes: number;
   seconds: number;
 };
-const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
+const StopWatchComponent = ({ id, tasktext, stopwatchtime }: WatchProp) => {
   const { stopWatch, resetWatch, deleteTaskFromWatch } =
     useContext(ClockContext);
   const [time, setTime] = useState<timeProp>({
-    hours: watchTime ? Math.abs(Math.floor(watchTime / 3600)) : 0,
-    minutes: watchTime ? Math.abs(Math.floor((watchTime % 3600) / 60)) : 0,
-    seconds: watchTime ? Math.abs(watchTime % 60) : 0,
+    hours: stopwatchtime ? Math.abs(Math.floor(stopwatchtime / 3600)) : 0,
+    minutes: stopwatchtime
+      ? Math.abs(Math.floor((stopwatchtime % 3600) / 60))
+      : 0,
+    seconds: stopwatchtime ? Math.abs(stopwatchtime % 60) : 0,
   });
   const [intervalId, setIntervalId] = useState(0);
   const [watchCheck, setWatchCheck] = useState(false);
@@ -68,7 +70,7 @@ const StopWatchComponent = ({ id, task, watchTime }: WatchProp) => {
       <CardHeader>
         <CardTitle>
           <p key={id} className="text-primary text-xl  my-2">
-            {task}
+            {tasktext}
           </p>
         </CardTitle>
         <hr />

@@ -1,30 +1,31 @@
 export type Data = {
   id: number;
-  task: string;
+  tasktext: string;
   timerTime?: number;
   stopWatchTime?: number;
+  created_at?: Date;
 };
 
 export const testDataTimer = [
   {
     id: 1,
-    task: "Prepare Dinner",
+    tasktext: "Prepare Dinner",
     timerTime: 600,
   },
   {
     id: 2,
-    task: "Do workout",
+    tasktext: "Do workout",
   },
 ];
 export const testDataStopWatch = [
   {
     id: 1,
-    task: "Prepare Dinner",
+    tasktext: "Prepare Dinner",
   },
 
   {
     id: 2,
-    task: "Do workout",
+    tasktext: "Do workout",
     watchTime: 900,
   },
 ];
