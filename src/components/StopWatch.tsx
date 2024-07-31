@@ -9,9 +9,13 @@ export const StopWatch = () => {
   console.log("Stopwach", stopWatchArray);
   return (
     <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
-      {stopWatchArray.map((item, i) => (
-        <StopWatchComponent key={item.id} {...item} />
-      ))}
+      {stopWatchArray?.length ? (
+        stopWatchArray.map((item, i) => (
+          <StopWatchComponent key={item.id} {...item} />
+        ))
+      ) : (
+        <p className={`text-center py-2`}>No tasks at the moment</p>
+      )}
     </div>
   );
 };

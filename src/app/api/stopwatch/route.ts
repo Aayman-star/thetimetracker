@@ -1,18 +1,13 @@
+import { eq, and, or, asc } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
-import { db, timeTable, Task, newTask } from "@/lib/schema";
-import { eq, and, asc } from "drizzle-orm";
-import { sql } from "@vercel/postgres";
+import { db, stopwatch, Task, newTask } from "@/lib/Logic/schema-stopwatch";
 
-/**The GET function is used to fetch data from the database . In this function I have defined a database table in the schema file and
- * also inferred its datatype from InferSelectMdodel and simply imported it into the route.ts file. This way I don't have to manually define the
- * data type. the res variable is receiving data from the table tasktable
- */
 type task = {
   id: number;
   user_id: string;
   tasktext: string;
-  timertime: number;
-  stopwatchtime: number;
+  starttime?: number;
+  stoptime?: number;
   created_At: Date;
 };
 export const GET = async (request: NextRequest) => {
@@ -24,9 +19,9 @@ export const GET = async (request: NextRequest) => {
     try {
       const tasks: Array<Task> = await db
         .select()
-        .from(timeTable)
-        .where(eq(timeTable.user_id, user_id))
-        .orderBy(asc(timeTable.id));
+        .from(stopwatch)
+        .where(eq(stopwatch.user_id, user_id))
+        .orderBy(asc(stopwatch.id));
 
       //console.log(todos);
       if (tasks.length) {
@@ -53,12 +48,10 @@ export const POST = async (request: NextRequest) => {
     /**Check if the user has sent the task text */
     if (req.user_id) {
       const res = await db
-        .insert(timeTable)
+        .insert(stopwatch)
         .values({
           user_id: req.user_id,
           tasktext: req.tasktext,
-          timertime: req?.timertime,
-          stopwatchtime: req?.stopwatchtime,
           created_at: new Date(),
         })
         .returning();
@@ -85,10 +78,10 @@ export const DELETE = async (request: NextRequest) => {
   try {
     if (Id && user_id) {
       const res = await db
-        .delete(timeTable)
+        .delete(stopwatch)
         .where(
-          eq(timeTable.id, Id as unknown as number) &&
-            eq(timeTable.user_id, user_id)
+          eq(stopwatch.id, Id as unknown as number) &&
+            eq(stopwatch.user_id, user_id)
         )
         .returning();
 
@@ -117,24 +110,27 @@ export const PATCH = async (request: NextRequest) => {
   // const user_id = req.searchParams.get("user_id") as string;
   console.log("payload", req);
   try {
-    if (req.id && req.user_id && req.timertime) {
+    if (req.id && req.user_id && req?.starttime) {
       const res = await db
-        .update(timeTable)
-        .set({ timertime: req?.timertime })
-        .where(eq(timeTable.id, req.id) && eq(timeTable.user_id, req.user_id))
+        .update(stopwatch)
+        .set({ starttime: req?.starttime })
+        .where(eq(stopwatch.id, req.id) && eq(stopwatch.user_id, req.user_id))
         .returning();
       return NextResponse.json({
-        message: "Timer Time updated successfully",
+        message: "starttime Time in stopwatch updated successfully",
         data: res,
       });
-    } else if (req.id && req.user_id && req.stopwatchtime) {
+    } else if (req.id && req.user_id && (req?.stoptime || !req?.stoptime)) {
+      console.log("I am in the if statement of req stoptime");
       const res = await db
-        .update(timeTable)
-        .set({ stopwatchtime: req?.stopwatchtime })
-        .where(eq(timeTable.id, req.id) && eq(timeTable.user_id, req.user_id))
+        .update(stopwatch)
+        .set({
+          stoptime: req?.stoptime > 0 ? req?.stoptime : null,
+        })
+        .where(eq(stopwatch.id, req.id) && eq(stopwatch.user_id, req.user_id))
         .returning();
       return NextResponse.json({
-        message: "Stopwatch Time updated successfully",
+        message: "Stoptime Time in stopwatch updated successfully",
         data: res,
       });
     } else {

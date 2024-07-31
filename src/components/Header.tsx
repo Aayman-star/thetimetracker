@@ -27,7 +27,7 @@ const Header = async () => {
           <p className="px-2">
             {" "}
             {capitalizeFirstLetter(username)}
-            {user?.id}
+            {/* {user?.id} */}
           </p>
           <UserButton />
         </SignedIn>

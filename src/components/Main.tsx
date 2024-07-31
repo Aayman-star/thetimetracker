@@ -16,20 +16,22 @@ import { DividerHorizontalIcon } from "@radix-ui/react-icons";
 
 const Main = () => {
   const { isLoaded, isSignedIn, user } = useUser();
-  const { addTaskTimer, addTaskWatch } = useContext(ClockContext);
+  const { addTaskTimer, addTaskWatch, addTask } = useContext(ClockContext);
   const [text, setText] = useState("");
   const [task, setTask] = useState<Data[]>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isSignedIn) {
-      addTaskTimer(text);
-      addTaskWatch(text);
+      // addTaskTimer(text);
+      // addTaskWatch(text);
+      addTask(text);
       setText("");
       console.log("not signed in");
     } else {
-      addTaskTimer(text);
-      addTaskWatch(text);
+      // addTaskTimer(text);
+      // addTaskWatch(text);
+      addTask(text);
       setText("");
     }
 

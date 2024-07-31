@@ -4,14 +4,16 @@ import { createContext } from "react";
 export type Timer = {
   id: number;
   tasktext: string;
-  timerTime?: number;
+  starttime?: number;
+  stoptime?: number;
   created_at?: Date;
 };
 // Props for the Stopwatch
 export type Watch = {
   id: number;
   tasktext: string;
-  watchTime?: number;
+  starttime?: number;
+  stoptime?: number;
   created_at?: Date;
 };
 export type inputContext = {
@@ -23,6 +25,7 @@ type TimeTrackingContextState = {
   stopWatchArray: Watch[];
   theme: string | undefined;
   setTheme: (theme: string) => void;
+  addTask: (task: string) => void;
   addTaskTimer: (task: string) => void;
   addTaskWatch: (task: string) => void;
   startTimer: (id: number, time: number) => void;
@@ -39,6 +42,7 @@ export const ClockContext = createContext<TimeTrackingContextState>({
   stopWatchArray: [],
   theme: "",
   setTheme: () => {},
+  addTask: () => {},
   addTaskTimer: () => {},
   addTaskWatch: () => {},
   startTimer: () => {},

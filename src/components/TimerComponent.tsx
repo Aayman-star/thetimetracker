@@ -26,6 +26,8 @@ type TimerProp = {
   id: number;
   tasktext: string;
   timertime?: number;
+  starttime?: number;
+  stoptime?: number;
 };
 type timeVariables = {
   hours: string;
@@ -37,7 +39,13 @@ type timeProp = {
   minutes: number;
   seconds: number;
 };
-const TimerComponent = ({ id, tasktext, timertime }: TimerProp) => {
+const TimerComponent = ({
+  id,
+  tasktext,
+  timertime,
+  starttime,
+  stoptime,
+}: TimerProp) => {
   const {
     register,
     handleSubmit,
@@ -53,11 +61,11 @@ const TimerComponent = ({ id, tasktext, timertime }: TimerProp) => {
   //?Time object to display and handle time,hours,minutes and seconds
 
   const [time, setTime] = useState<timeProp>({
-    hours: timertime ? Math.abs(Math.floor(timertime / 3600)) : 0,
-    minutes: timertime
-      ? Math.abs(Math.floor((timertime % 3600) / 60))
+    hours: starttime ? Math.abs(Math.floor(starttime / 3600)) : 0,
+    minutes: starttime
+      ? Math.abs(Math.floor((starttime % 3600) / 60))
       : 300 / 60,
-    seconds: timertime ? Math.abs(timertime % 60) : 0,
+    seconds: starttime ? Math.abs(starttime % 60) : 0,
   });
   //? This variable will keep record of the time given as input by the user
   const [userTime, setUserTime] = useState<timeProp>({
