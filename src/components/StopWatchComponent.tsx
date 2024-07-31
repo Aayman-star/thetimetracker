@@ -21,6 +21,7 @@ type WatchProp = {
   created_at?: Date;
 };
 type timeProp = {
+  //Time Variable
   hours: number;
   minutes: number;
   seconds: number;
