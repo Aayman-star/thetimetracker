@@ -37,12 +37,8 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const { isLoaded, isSignedIn, user } = useUser();
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [Tasks, setTasks] = useState<any[]>([]);
-  const [timerArray, setTimerArray] = useState<Timer[]>(
-    user ? [] : testDataTimer
-  );
-  const [stopWatchArray, setStopWatchArray] = useState<Watch[]>(
-    user ? [] : testDataStopWatch
-  );
+  const [timerArray, setTimerArray] = useState<Timer[]>([]);
+  const [stopWatchArray, setStopWatchArray] = useState<Watch[]>([]);
   //   const [userInput, setUserInput] = useState<string>("");
   const fetchTimerData = async (id: string) => {
     const data: Array<data> = await fetchFromTimer(id);
@@ -71,6 +67,9 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
     if (isSignedIn && user) {
       fetchTimerData(user?.id);
       fetchStopwatchData(user?.id);
+    } else {
+      setTimerArray(testDataTimer);
+      setStopWatchArray(testDataStopWatch);
     }
   }, [isSignedIn, user]);
 
