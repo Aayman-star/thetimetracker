@@ -64,12 +64,13 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
     setStopWatchArray(tempStopWatchData);
   };
   useEffect(() => {
-    if (isSignedIn && user) {
-      fetchTimerData(user?.id);
-      fetchStopwatchData(user?.id);
-    } else {
+    if (!isSignedIn && !isLoaded && !user) {
       setTimerArray(testDataTimer);
       setStopWatchArray(testDataStopWatch);
+    }
+    if (isSignedIn && isLoaded && user) {
+      fetchTimerData(user?.id);
+      fetchStopwatchData(user?.id);
     }
   }, [isSignedIn, user]);
 
