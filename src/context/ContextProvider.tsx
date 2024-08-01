@@ -39,6 +39,7 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const [Tasks, setTasks] = useState<any[]>([]);
   const [timerArray, setTimerArray] = useState<Timer[]>([]);
   const [stopWatchArray, setStopWatchArray] = useState<Watch[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   //   const [userInput, setUserInput] = useState<string>("");
   const fetchTimerData = async (id: string) => {
     const data: Array<data> = await fetchFromTimer(id);
@@ -72,6 +73,7 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
       fetchTimerData(user?.id);
       fetchStopwatchData(user?.id);
     }
+    setIsLoading(false);
   }, [isSignedIn, user]);
 
   //? Function to add task to the timer array
@@ -184,6 +186,7 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
         theme,
         timerArray,
         stopWatchArray,
+        isLoading,
         setTheme,
         addTask,
         addTaskTimer,

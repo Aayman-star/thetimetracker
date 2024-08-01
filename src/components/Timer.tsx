@@ -9,18 +9,30 @@ import { useUser } from "@clerk/nextjs";
 const Timer = () => {
   const { isLoaded, isSignedIn, user } = useUser();
 
-  const { timerArray } = useContext(ClockContext);
+  const { timerArray, isLoading } = useContext(ClockContext);
 
   console.log("Timer", timerArray);
   return (
-    <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
-      {timerArray?.length ? (
-        timerArray.map((item, i) => <TimerComponent key={item.id} {...item} />)
+    <div>
+      {isLoading ? (
+        <p className="py-2 text-primary">Waiting for Timer tasks</p>
       ) : (
-        <p>No tasks at the moment in the Timer</p>
+        <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
+          {timerArray?.length > 0 &&
+            timerArray.map((item, i) => (
+              <TimerComponent key={item.id} {...item} />
+            ))}
+        </div>
       )}
     </div>
   );
 };
 
 export default Timer;
+//  <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
+//     {timerArray?.length ? (
+//       timerArray.map((item, i) => <TimerComponent key={item.id} {...item} />)
+//     ) : (
+//       <p>No tasks at the moment in the Timer</p>
+//     )}
+//   </div>

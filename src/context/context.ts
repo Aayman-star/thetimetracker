@@ -24,6 +24,7 @@ type TimeTrackingContextState = {
   timerArray: Timer[];
   stopWatchArray: Watch[];
   theme: string | undefined;
+  isLoading: boolean;
   setTheme: (theme: string) => void;
   addTask: (task: string) => void;
   addTaskTimer: (task: string) => void;
@@ -41,6 +42,7 @@ export const ClockContext = createContext<TimeTrackingContextState>({
   timerArray: [],
   stopWatchArray: [],
   theme: "",
+  isLoading: true,
   setTheme: () => {},
   addTask: () => {},
   addTaskTimer: () => {},
