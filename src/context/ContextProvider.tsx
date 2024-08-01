@@ -35,7 +35,7 @@ type data = {
 };
 const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const { isLoaded, isSignedIn, user } = useUser();
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [Tasks, setTasks] = useState<any[]>([]);
   const [timerArray, setTimerArray] = useState<Timer[]>([]);
   const [stopWatchArray, setStopWatchArray] = useState<Watch[]>([]);
@@ -44,9 +44,9 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const fetchTimerData = async (id: string) => {
     const data: Array<data> = await fetchFromTimer(id);
     if (data) {
-      console.log("Timer Array:", data);
+      // console.log("Timer Array:", data);
     } else {
-      console.log("No Data");
+      // console.log("No Data");
     }
     const tempTimerData = data?.length ? data : [];
 
@@ -55,9 +55,9 @@ const ClockContextProvider = ({ children }: ContextProviderProps) => {
   const fetchStopwatchData = async (id: string) => {
     const dataOne: Array<data> = await fetchFromStopwatch(id);
     if (dataOne) {
-      console.log("Stopwatch Array:", dataOne);
+      // console.log("Stopwatch Array:", dataOne);
     } else {
-      console.log("No Data");
+      // console.log("No Data");
     }
 
     const tempStopWatchData = dataOne?.length ? dataOne : [];
