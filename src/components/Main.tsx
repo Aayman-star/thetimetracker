@@ -15,7 +15,7 @@ import { SignInButton, SignedOut } from "@clerk/nextjs";
 import { DividerHorizontalIcon } from "@radix-ui/react-icons";
 
 const Main = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
   const { addTaskTimer, addTaskWatch, addTask } = useContext(ClockContext);
   const [text, setText] = useState("");
   const [task, setTask] = useState<Data[]>();

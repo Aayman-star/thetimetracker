@@ -6,7 +6,7 @@ import { ClockContext } from "@/context/context";
 
 export const StopWatch = () => {
   const { stopWatchArray, isLoading, theme } = useContext(ClockContext);
-  console.log("Stopwach", stopWatchArray);
+  // console.log("Stopwach", stopWatchArray);
   return (
     <div>
       {isLoading ? (

@@ -11,7 +11,7 @@ const Timer = () => {
 
   const { timerArray, isLoading, theme } = useContext(ClockContext);
 
-  console.log("Timer", timerArray);
+  // console.log("Timer", timerArray);
   return (
     <div>
       {isLoading ? (

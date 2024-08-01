@@ -121,7 +121,7 @@ export const PATCH = async (request: NextRequest) => {
         data: res,
       });
     } else if (req.id && req.user_id && (req?.stoptime || !req?.stoptime)) {
-      console.log("I am in the if statement of req stoptime");
+      // console.log("I am in the if statement of req stoptime");
       const res = await db
         .update(stopwatch)
         .set({
