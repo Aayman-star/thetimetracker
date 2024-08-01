@@ -18,7 +18,7 @@ export const fetchFromStopwatch = async (user_id: string) => {
     }
     /**Extracting the todos array from the received data */
     const { tasks } = await response.json();
-    console.log(`THIS IS THE RECEIVED DAT`, tasks);
+    // console.log(`THIS IS THE RECEIVED DAT`, tasks);
     return tasks;
   } catch (error) {
     console.error("Error:", error);
