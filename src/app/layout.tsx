@@ -9,6 +9,7 @@ import ClockContextProvider from "@/context/ContextProvider";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thetimetracker.vercel.app/"),
   title: { default: "TheTimeTracker", template: "%s  |  Time Tracker" },
   description: "An app that helps you keep track of your time",
 
@@ -20,6 +21,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     images: "/opengraph-image.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TheTimeTracker",
+    description: "An app that helps you keep track of your time.",
   },
 };
 
