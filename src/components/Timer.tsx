@@ -9,7 +9,7 @@ import { useUser } from "@clerk/nextjs";
 const Timer = () => {
   const { isLoaded, isSignedIn, user } = useUser();
 
-  const { timerArray, isLoading } = useContext(ClockContext);
+  const { timerArray, isLoading, theme } = useContext(ClockContext);
 
   console.log("Timer", timerArray);
   return (
@@ -18,10 +18,18 @@ const Timer = () => {
         <p className="py-2 text-primary">Waiting for Timer tasks</p>
       ) : (
         <div className="grid grid-col-1 lg:grid-cols-2 gap-4">
-          {timerArray?.length > 0 &&
+          {timerArray?.length > 0 ? (
             timerArray.map((item, i) => (
               <TimerComponent key={item.id} {...item} />
-            ))}
+            ))
+          ) : (
+            <p
+              className={`py-2 ${
+                theme === "dark" ? "text-primary" : "text-foreground"
+              }`}>
+              No tasks at the moment in the Timer
+            </p>
+          )}
         </div>
       )}
     </div>

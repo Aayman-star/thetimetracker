@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ClockContext } from "@/context/context";
 
 export const StopWatch = () => {
-  const { stopWatchArray, isLoading } = useContext(ClockContext);
+  const { stopWatchArray, isLoading, theme } = useContext(ClockContext);
   console.log("Stopwach", stopWatchArray);
   return (
     <div>
@@ -18,7 +18,10 @@ export const StopWatch = () => {
               <StopWatchComponent key={item.id} {...item} />
             ))
           ) : (
-            <p className={`text-center py-2`}>
+            <p
+              className={`py-2 ${
+                theme === "dark" ? "text-primary" : "text-foreground"
+              }`}>
               No tasks at the moment in the stopwatch
             </p>
           )}
