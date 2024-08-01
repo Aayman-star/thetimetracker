@@ -14,7 +14,9 @@ export const StopWatch = () => {
           <StopWatchComponent key={item.id} {...item} />
         ))
       ) : (
-        <p className={`text-center py-2`}>No tasks at the moment</p>
+        <p className={`text-center py-2`}>
+          No tasks at the moment in the stopwatch
+        </p>
       )}
     </div>
   );

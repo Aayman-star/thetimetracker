@@ -17,7 +17,7 @@ const Timer = () => {
       {timerArray?.length ? (
         timerArray.map((item, i) => <TimerComponent key={item.id} {...item} />)
       ) : (
-        <p>No tasks at the moment</p>
+        <p>No tasks at the moment in the Timer</p>
       )}
     </div>
   );

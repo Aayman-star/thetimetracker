@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { inter, monty } from "@/lib/fonts";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, ClerkLoading } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import ClockContextProvider from "@/context/ContextProvider";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
@@ -30,6 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange>
             <ClockContextProvider>
               <Header />
+
               {children}
               <Footer />
             </ClockContextProvider>

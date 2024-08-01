@@ -25,7 +25,7 @@ const Main = () => {
     if (!isSignedIn) {
       // addTaskTimer(text);
       // addTaskWatch(text);
-      addTask(text);
+      // addTask(text);
       setText("");
       console.log("not signed in");
     } else {
@@ -50,7 +50,7 @@ const Main = () => {
             className="placeholder-foreground placeholder-opacity-50 outline-none text-foreground"
             placeholder={
               !isSignedIn
-                ? `Sign In to save your tasks...`
+                ? `Sign In to get started with the time tracker...`
                 : `Enter your task here...`
             }
             value={text}
