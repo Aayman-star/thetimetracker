@@ -21,29 +21,48 @@ const Main = () => {
   const [task, setTask] = useState<Data[]>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     if (!isSignedIn) {
-      // addTaskTimer(text);
-      // addTaskWatch(text);
-      // addTask(text);
+      e.preventDefault();
       setText("");
       console.log("not signed in");
     } else {
-      // addTaskTimer(text);
-      // addTaskWatch(text);
-      addTask(text);
+      e.preventDefault();
+      addTaskWatch(text);
       setText("");
     }
 
     // const newTask: Data = { id: task.length + 1, task: text };
     // setTask([...task, newTask]);
   };
+  const addToTimer = () => {
+    if (!isSignedIn) {
+      setText("");
+    }
+    addTaskTimer(text);
+    setText("");
+  };
+  const addToWatch = () => {
+    if (!isSignedIn) {
+      setText("");
+    }
+    addTaskWatch(text);
+    setText("");
+  };
+
   return (
     <>
       <div className="flex flex-col items-center gap-y-4">
         <form
           className="flex gap-x-2 w-full md:w-[50%] items-center "
-          onSubmit={handleSubmit}
+          //onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            if (!text.trim()) {
+              e.preventDefault();
+              alert("Please enter a task.");
+            } else {
+              handleSubmit(e);
+            }
+          }}
           action="post">
           <Input
             type="text"
@@ -56,8 +75,34 @@ const Main = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <Button type="submit" variant="secondary">
+          {/* <Button type="submit" variant="secondary">
             +
+          </Button> */}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={(e) => {
+              if (!text.trim()) {
+                e.preventDefault();
+                alert("Please enter a task.");
+              } else {
+                addToWatch;
+              }
+            }}>
+            Stopwatch+
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={(e) => {
+              if (!text.trim()) {
+                e.preventDefault();
+                alert("Please enter a task.");
+              } else {
+                addToTimer;
+              }
+            }}>
+            Timer+
           </Button>
         </form>
         {/* <p className="text-background">{task}</p> */}
