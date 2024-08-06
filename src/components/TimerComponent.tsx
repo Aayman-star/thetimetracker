@@ -134,6 +134,7 @@ const TimerComponent = ({
   };
   //? Delete Task from the array
   const deleteTask = (id: number) => {
+    stop();
     deleteTaskFromTimer(id);
   };
   const onSubmit: SubmitHandler<timeVariables> = (data) => {
