@@ -12,7 +12,6 @@ import { useContext } from "react";
 import { ClockContext } from "@/context/context";
 import { useUser } from "@clerk/nextjs";
 import { SignInButton, SignedOut } from "@clerk/nextjs";
-import { DividerHorizontalIcon } from "@radix-ui/react-icons";
 
 const Main = () => {
   const { isSignedIn } = useUser();
@@ -35,16 +34,10 @@ const Main = () => {
     // setTask([...task, newTask]);
   };
   const addToTimer = () => {
-    if (!isSignedIn) {
-      setText("");
-    }
     addTaskTimer(text);
     setText("");
   };
   const addToWatch = () => {
-    if (!isSignedIn) {
-      setText("");
-    }
     addTaskWatch(text);
     setText("");
   };
@@ -79,27 +72,39 @@ const Main = () => {
             +
           </Button> */}
           <Button
-            type="button"
+            type="submit"
             variant="secondary"
             onClick={(e) => {
               if (!text.trim()) {
                 e.preventDefault();
                 alert("Please enter a task.");
               } else {
-                addToWatch;
+                if (!isSignedIn) {
+                  e.preventDefault();
+                  setText("");
+                } else {
+                  e.preventDefault();
+                  addToWatch();
+                }
               }
             }}>
             Stopwatch+
           </Button>
           <Button
-            type="button"
+            type="submit"
             variant="secondary"
             onClick={(e) => {
               if (!text.trim()) {
                 e.preventDefault();
                 alert("Please enter a task.");
               } else {
-                addToTimer;
+                if (!isSignedIn) {
+                  e.preventDefault();
+                  setText("");
+                } else {
+                  e.preventDefault();
+                  addToTimer();
+                }
               }
             }}>
             Timer+
