@@ -55,7 +55,7 @@ const TimerComponent = ({
   const [play, { stop }] = useSound("/sounds/bell.mp3");
   //!These functions are coming from the context */
 
-  const { startTimer, resetTimer, deleteTaskFromTimer } =
+  const { startTimer, resetTimer, deleteTaskFromTimer, theme } =
     useContext(ClockContext);
 
   //?Time object to display and handle time,hours,minutes and seconds
@@ -171,7 +171,7 @@ const TimerComponent = ({
   };
   return (
     <div>
-      <Card className="my-4 ">
+      <Card className={`my-4 ${theme === "dark" && "bg-transparent"}`}>
         <CardHeader>
           <CardTitle>
             <p key={id} className=" text-2xl my-2">
